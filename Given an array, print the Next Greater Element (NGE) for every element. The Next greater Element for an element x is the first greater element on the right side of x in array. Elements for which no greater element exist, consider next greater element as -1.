@@ -1,0 +1,53 @@
+N = int(input(''))
+ele = list()
+for i in range(N):
+    size = int(input(''))
+    element = list(map(int,input().split()))
+    ele.append(element)
+
+for j in range(len(ele)):
+    class Stack:
+        def __init__(self,top=-1):
+            self.top = top
+            self.stack = [0]
+
+        def push(self,data):
+            self.stack.append(data)
+            self.top += 1
+
+        def pop(self):
+            self.stack.pop()
+            self.top -= 1
+
+        def peek(self):
+            return self.stack[-1]
+
+        def isEmpty(self):
+            if self.top == -1:
+                return True
+            return False
+
+
+    class nge(Stack):
+        def __init__(self,element):
+            self.element = element
+            self.stack = Stack()
+
+        def get_answer(self):
+            for s in self.element:
+                if self.stack.isEmpty():
+                    self.stack.push(s)
+                elif s < self.stack.peek():
+                    self.stack.push(s)
+                else:
+                    while s > self.stack.peek() and self.stack.isEmpty() is False:
+                        print(f'next greater element for {self.stack.peek()} is : {s}')
+                        self.stack.pop()
+                    self.stack.push(s)
+            while self.stack.isEmpty() is False:
+                print(f'next greater element for {self.stack.peek()} is NIL')
+                self.stack.pop()
+
+
+    element1 = nge(ele[j])
+    element1.get_answer()
